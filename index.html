@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stratosphere // Premium BizHub</title>
+    <style>
+        :root {
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-light: #e2e8f0;
+            
+            /* Professional Premium Palette */
+            --brand-navy: #1e3a8a;
+            --p-reg-bg: #eff6ff;
+            --p-reg-txt: #1e40af;
+            --p-round-bg: #f1f5f9;
+            --p-round-txt: #334155;
+            
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            padding: 24px 16px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .phone-container {
+            width: 100%;
+            max-width: 460px;
+            background-color: var(--bg-main);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-bottom: 100px;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .greeting {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .username {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        /* Summary Banner Card */
+        .summary-card {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .summary-title {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 2px;
+            color: var(--text-main);
+        }
+
+        .summary-subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .status-badge-circle {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background-color: #f8fafc;
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .status-num {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .status-lbl {
+            font-size: 8px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* Tabs Navigation */
+        .tabs-nav {
+            display: flex;
+            background-color: #e2e8f0;
+            padding: 3px;
+            border-radius: var(--radius-sm);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            background: none;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: calc(var(--radius-sm) - 1px);
+            transition: all 0.15s ease;
+        }
+
+        .tab-btn.active {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            box-shadow: var(--shadow);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin: 8px 4px 12px 4px;
+        }
+
+        /* List Layout Elements */
+        .comp-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .comp-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .comp-meta-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .comp-meta-track {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 1px;
+        }
+
+        .comp-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .action-link {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--p-reg-txt);
+            cursor: pointer;
+        }
+
+        .action-link.delete {
+            color: #94a3b8;
+        }
+
+        /* Timeline Tracker Dots */
+        .phase-timeline-visual {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .phase-node {
+            position: relative;
+            background-color: #f8fafc;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 8px 12px;
+            min-width: 110px;
+            flex: 1;
+        }
+
+        .node-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #cbd5e1;
+            margin-bottom: 6px;
+        }
+        
+        .phase-node.reg .node-dot { background-color: var(--p-reg-txt); }
+        .phase-node.round-node .node-dot { background-color: var(--p-round-txt); }
+
+        .node-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 2px;
+            white-space: nowrap;
+        }
+
+        .node-days {
+            font-size: 9px;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        /* Premium Optimized Calendar Architecture */
+        .cal-container-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
+        }
+
+        .cal-selector-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .cal-month-title {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .cal-nav-btn {
+            background: none;
+            border: 1px solid var(--border-light);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .cal-grid-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .cal-days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 3px;
+        }
+
+        .cal-cell {
+            min-height: 85px; 
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            padding: 4px;
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            overflow: hidden;
+        }
+
+        .cal-cell.empty {
+            background: none;
+            border-color: transparent;
+        }
+
+        .cal-cell-num {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 3px;
+            line-height: 1;
+        }
+
+        /* Ultra Compact Fixed Scale Event Blocks */
+        .cal-events-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            overflow-y: auto;
+            flex-grow: 1;
+            max-height: 64px; 
+            padding-right: 1px;
+        }
+
+        .cal-events-stack::-webkit-scrollbar {
+            width: 2px;
+        }
+        .cal-events-stack::-webkit-scrollbar-thumb {
+            background-color: var(--border-light);
+            border-radius: 2px;
+        }
+
+        .cal-event-pill {
+            font-size: 8px;
+            font-weight: 500;
+            padding: 2px 3px;
+            border-radius: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.1;
+            border-left: 2px solid transparent;
+        }
+
+        .cal-event-pill.p-reg { 
+            background-color: var(--p-reg-bg); 
+            color: var(--p-reg-txt);
+            border-left-color: var(--p-reg-txt);
+        }
+        .cal-event-pill.p-round { 
+            background-color: var(--p-round-bg); 
+            color: var(--p-round-txt);
+            border-left-color: #64748b;
+        }
+
+        /* Radar Box & Auxiliary Blocks */
+        .radar-box {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
+        }
+
+        .radar-header {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .radar-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .radar-item:last-child {
+            border-bottom: none;
+        }
+
+        .radar-info-title {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .radar-info-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .add-preset-btn {
+            padding: 4px 10px;
+            background-color: #f1f5f9;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+        }
+
+        /* Floating Nav Bar Trigger */
+        .bottom-nav-trigger {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 32px);
+            max-width: 428px;
+            height: 52px;
+            background-color: #0f172a;
+            border-radius: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+            z-index: 100;
+            cursor: pointer;
+        }
+
+        .nav-text {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .plus-icon-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0f172a;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* System Drawers */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(2px);
+            z-index: 200;
+            display: none;
+            align-items: flex-end;
+        }
+
+        .drawer-sheet {
+            width: 100%;
+            background-color: #ffffff;
+            border-top-left-radius: var(--radius-lg);
+            border-top-right-radius: var(--radius-lg);
+            padding: 24px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .drawer-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .close-drawer {
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            background-color: #f8fafc;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            color: var(--text-main);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #64748b;
+        }
+
+        /* Dynamic Input Generator Group Styles */
+        .dynamic-rounds-box {
+            border: 1px dashed var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            background-color: #f8fafc;
+            margin-bottom: 14px;
+        }
+
+        .rounds-box-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .round-row-item {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .round-row-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .btn-add-round {
+            padding: 4px 8px;
+            background-color: #0f172a;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-remove-round {
+            background: none;
+            border: none;
+            color: var(--accent-red);
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 0 4px;
+        }
+
+        .save-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #0f172a;
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .conflict-banner {
+            background-color: #fef2f2;
+            border: 1px solid #fee2e2;
+            border-radius: var(--radius-md);
+            padding: 12px;
+            color: var(--accent-red);
+            font-size: 12px;
+            display: none;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-container">
+        
+        <!-- Header -->
+        <div class="profile-header">
+            <div class="user-info">
+                
+                <div>
+                    <div class="greeting">Business Competition Calendar</div>
+                    <div class="username">Shadman Shahid Rayan</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Status Display -->
+        <div class="summary-card">
+            <div>
+                <div class="summary-title" id="summary-headline">Optimal Schedule</div>
+                <div class="summary-subtitle" id="summary-subtext">No overlapping conflicts detected</div>
+            </div>
+            <div class="status-badge-circle">
+                <div class="status-num" id="active-count">0</div>
+                <div class="status-lbl">Tracks</div>
+            </div>
+        </div>
+
+        <div class="conflict-banner" id="conflict-zone"></div>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs-nav">
+            <button class="tab-btn active" onclick="switchTab('list-view', this)">Track List</button>
+            <button class="tab-btn" onclick="switchTab('calendar-view', this)">Calendar View</button>
+        </div>
+
+        <!-- TAB 1: LIST DOCK -->
+        <div id="list-view" class="tab-content active">
+            <div class="section-title">Active Competitions[cite: 1]</div>
+            <div id="comps-list-container"></div>
+        </div>
+
+        <!-- TAB 2: MATRICES CALENDAR -->
+        <div id="calendar-view" class="tab-content">
+            <div class="section-title">Timeline Alignment</div>
+            <div class="cal-container-card">
+                <div class="cal-selector-header">
+                    <button class="cal-nav-btn" onclick="changeMonth(-1)">&larr;</button>
+                    <div class="cal-month-title" id="calendar-month-year-lbl">May 2026</div>
+                    <button class="cal-nav-btn" onclick="changeMonth(1)">&rarr;</button>
+                </div>
+                <div class="cal-grid-weekdays">
+                    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                </div>
+                <div class="cal-days-grid" id="calendar-cells-container"></div>
+            </div>
+        </div>
+
+        <!-- Recommendations Dock -->
+        <div class="radar-box">
+            <div class="radar-header">Smart Radar Recommendations</div>
+            <div id="radar-container"></div>
+        </div>
+
+    </div>
+
+    <!-- Universal Float Dock Action -->
+    <div class="bottom-nav-trigger" onclick="openDrawer()">
+        <span class="nav-text">Add Competition Profile</span>
+        <div class="plus-icon-circle">+</div>
+    </div>
+
+    <!-- Configuration Drawer -->
+    <div class="drawer-overlay" id="drawer-modal" onclick="closeDrawerOutside(event)">
+        <div class="drawer-sheet">
+            <div class="drawer-header">
+                <div class="drawer-title" id="form-intent-title">New Entry Matrix</div>
+                <div class="close-drawer" onclick="closeDrawer()">&times;</div>
+            </div>
+            
+            <input type="hidden" id="edit-index" value="-1">
+
+            <div class="form-group">
+                <label>Competition Name</label>
+                <input type="text" id="inp-name" class="form-control" placeholder="e.g., Capitalizer 2026">
+            </div>
+
+            <div class="form-group">
+                <label>Track Specialization</label>
+                <input type="text" id="inp-track" class="form-control" placeholder="e.g., Investment Strategy">
+            </div>
+
+            <div class="form-group">
+                <label>Registration Deadline[cite: 1]</label>
+                <input type="date" id="inp-reg-deadline" class="form-control">
+            </div>
+
+            <!-- Dynamic Rounds Configuration Manager Section -->
+            <div class="dynamic-rounds-box">
+                <div class="rounds-box-header">
+                    <label style="margin-bottom: 0;">Rounds Configuration Profiles[cite: 1]</label>
+                    <button type="button" class="btn-add-round" onclick="addNewRoundRow('', '')">+ Add Round[cite: 1]</button>
+                </div>
+                <div id="rounds-inputs-root"></div>
+            </div>
+
+            <button class="save-btn" onclick="saveData()">Commit Configuration</button>
+        </div>
+    </div>
+
+    <script>
+        let currentCalDate = new Date(2026, 4, 1); 
+
+        // Fully restructured model arrays to track dynamic numbers of milestones
+        let competitions = [
+            { 
+                name: "Capitalizer 2026", 
+                track: "Investment Valuation", 
+                regDeadline: "2026-05-04",
+                rounds: [
+                    { label: "Round 1: Case Crack", deadline: "2026-05-12" },
+                    { label: "Grand Finale Pitch", deadline: "2026-05-18" }
+                ]
+            },
+            { 
+                name: "Negocio 3.0", 
+                track: "Sales Strategy", 
+                regDeadline: "2026-05-10",
+                rounds: [
+                    { label: "Round 1: MCQ Deck", deadline: "2026-05-14" },
+                    { label: "Round 2: Case Video", deadline: "2026-05-20" },
+                    { label: "Grand Finale", deadline: "2026-05-25" }
+                ]
+            }
+        ];
+
+        const presets = [
+            { name: "IBA Bizmaniacs", track: "Corporate Strategy" },
+            { name: "EcoBricks Pitchfest", track: "Sustainable Venture" }
+        ];
+
+        function switchTab(tabId, el) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            el.classList.add('active');
+
+            if(tabId === 'calendar-view') {
+                renderCalendarGrid();
+            }
+        }
+
+        function formatDisplayDate(dateStr) {
+            if (!dateStr) return '';
+            const d = new Date(dateStr);
+            if (isNaN(d.getTime())) return '';
+            return d.toLocaleDateString('en-US', { day: 'numeric', month: 'short', timeZone: 'UTC' });
+        }
+
+        function renderList() {
+            const container = document.getElementById('comps-list-container');
+            container.innerHTML = '';
+            document.getElementById('active-count').innerText = competitions.length;
+
+            competitions.forEach((comp, idx) => {
+                const card = document.createElement('div');
+                card.className = 'comp-card';
+                
+                let roundsHTML = '';
+                comp.rounds.forEach(r => {
+                    roundsHTML += `
+                        <div class="phase-node round-node">
+                            <div class="node-dot"></div>
+                            <div class="node-label">${r.label || 'Unlabeled Round'}</div>
+                            <div class="node-days">Due: ${formatDisplayDate(r.deadline)}</div>
+                        </div>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="comp-card-header">
+                        <div>
+                            <div class="comp-meta-title">${comp.name}</div>
+                            <div class="comp-meta-track">${comp.track}</div>
+                        </div>
+                        <div class="comp-actions">
+                            <span class="action-link" onclick="triggerEdit(${idx})">Edit</span>
+                            <span class="action-link delete" onclick="triggerDelete(${idx})">Remove</span>
+                        </div>
+                    </div>
+                    <div class="phase-timeline-visual">
+                        <div class="phase-node reg">
+                            <div class="node-dot"></div>
+                            <div class="node-label">Registration</div>
+                            <div class="node-days">Deadline: ${formatDisplayDate(comp.regDeadline)}</div>
+                        </div>
+                        ${roundsHTML}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            checkConflicts();
+            renderCalendarGrid();
+        }
+
+        function renderCalendarGrid() {
+            const year = currentCalDate.getFullYear();
+            const month = currentCalDate.getMonth();
+            
+            const monthLabels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            document.getElementById('calendar-month-year-lbl').innerText = `${monthLabels[month]} ${year}`;
+
+            const container = document.getElementById('calendar-cells-container');
+            container.innerHTML = '';
+
+            const firstDayIndex = new Date(year, month, 1).getDay();
+            const totalDays = new Date(year, month + 1, 0).getDate();
+
+            for(let i = 0; i < firstDayIndex; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'cal-cell empty';
+                container.appendChild(emptyCell);
+            }
+
+            for(let day = 1; day <= totalDays; day++) {
+                const cell = document.createElement('div');
+                cell.className = 'cal-cell';
+                
+                const currentStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                
+                const cellNum = document.createElement('div');
+                cellNum.className = 'cal-cell-num';
+                cellNum.innerText = day;
+                cell.appendChild(cellNum);
+
+                const eventsStack = document.createElement('div');
+                eventsStack.className = 'cal-events-stack';
+
+                competitions.forEach(comp => {
+                    if(comp.regDeadline === currentStr) {
+                        eventsStack.innerHTML += `<div class="cal-event-pill p-reg" title="${comp.name}: Registration Close">${comp.name} [Reg]</div>`;
+                    }
+                    comp.rounds.forEach(r => {
+                        if(r.deadline === currentStr) {
+                            eventsStack.innerHTML += `<div class="cal-event-pill p-round" title="${comp.name}: ${r.label}">${comp.name}: ${r.label}</div>`;
+                        }
+                    });
+                });
+
+                cell.appendChild(eventsStack);
+                container.appendChild(cell);
+            }
+        }
+
+        function changeMonth(direction) {
+            currentCalDate.setMonth(currentCalDate.getMonth() + direction);
+            renderCalendarGrid();
+        }
+
+        function checkConflicts() {
+            let directDeadlinesMap = {};
+            let conflicts = {};
+
+            competitions.forEach(comp => {
+                if(comp.regDeadline) {
+                    if(!directDeadlinesMap[comp.regDeadline]) directDeadlinesMap[comp.regDeadline] = [];
+                    directDeadlinesMap[comp.regDeadline].push(`${comp.name} [Reg Close]`);
+                }
+                comp.rounds.forEach(r => {
+                    if(r.deadline) {
+                        if(!directDeadlinesMap[r.deadline]) directDeadlinesMap[r.deadline] = [];
+                        directDeadlinesMap[r.deadline].push(`${comp.name} [${r.label}]`);
+                    }
+                });
+            });
+
+            for (let dayStr in directDeadlinesMap) {
+                if (directDeadlinesMap[dayStr].length > 1) {
+                    let sortedKeys = [...directDeadlinesMap[dayStr]].sort();
+                    let key = sortedKeys.join(' & ');
+                    if (!conflicts[key]) conflicts[key] = [];
+                    conflicts[key].push(dayStr);
+                }
+            }
+
+            const banner = document.getElementById('conflict-zone');
+            const hHeadline = document.getElementById('summary-headline');
+            const hSub = document.getElementById('summary-subtext');
+
+            let conflictMessages = [];
+            for (let key in conflicts) {
+                let displayDates = conflicts[key].map(d => formatDisplayDate(d)).join(', ');
+                conflictMessages.push(`<strong>${key}</strong> collide on: ${displayDates}`);
+            }
+
+            if (conflictMessages.length > 0) {
+                banner.style.display = 'block';
+                banner.innerHTML = `<strong>⚠️ Exact Milestone Collisions Detected:</strong><br>` + conflictMessages.map(c => `• ${c}`).join('<br>');
+                hHeadline.innerText = "Timeline Crunch";
+                hSub.innerText = "Multiple track targets landed on identical slots";
+            } else {
+                banner.style.display = 'none';
+                hHeadline.innerText = "Optimal Schedule";
+                hSub.innerText = "No overlapping conflicts detected";
+            }
+        }
+
+        function addNewRoundRow(labelValue = '', deadlineValue = '') {
+            const root = document.getElementById('rounds-inputs-root');
+            const container = document.createElement('div');
+            container.className = 'round-row-item';
+            container.innerHTML = `
+                <input type="text" placeholder="Round Label (e.g., Round 1)" class="form-control row-round-label" value="${labelValue}" style="flex:2;">
+                <input type="date" class="form-control row-round-deadline" value="${deadlineValue}" style="flex:2;">
+                <button type="button" class="btn-remove-round" onclick="this.parentElement.remove()">&times;</button>
+            `;
+            root.appendChild(container);
+        }
+
+        function renderPresets() {
+            const container = document.getElementById('radar-container');
+            container.innerHTML = '';
+            presets.forEach(p => {
+                const item = document.createElement('div');
+                item.className = 'radar-item';
+                item.innerHTML = `
+                    <div>
+                        <div class="radar-info-title">${p.name}</div>
+                        <div class="radar-info-sub">${p.track}</div>
+                    </div>
+                    <button class="add-preset-btn" onclick="loadPreset('${p.name}', '${p.track}')">+ Map</button>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function loadPreset(name, track) {
+            document.getElementById('inp-name').value = name;
+            document.getElementById('inp-track').value = track;
+            
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('inp-reg-deadline').value = today;
+            
+            document.getElementById('rounds-inputs-root').innerHTML = '';
+            addNewRoundRow('Round 1: Case Match', today);
+            addNewRoundRow('Grand Pitch Finale', today);
+            
+            openDrawer();
+        }
+
+        function openDrawer() {
+            document.getElementById('drawer-modal').style.display = 'flex';
+        }
+
+        function closeDrawer() {
+            document.getElementById('drawer-modal').style.display = 'none';
+            resetForm();
+        }
+
+        function closeDrawerOutside(e) {
+            if (e.target.id === 'drawer-modal') closeDrawer();
+        }
+
+        function saveData() {
+            const name = document.getElementById('inp-name').value.trim();
+            const track = document.getElementById('inp-track').value.trim();
+            const regDeadline = document.getElementById('inp-reg-deadline').value;
+            const idx = parseInt(document.getElementById('edit-index').value);
+
+            if (!name || !track || !regDeadline) {
+                return alert("Core alignment headers and registration benchmarks cannot be left empty.");
+            }
+
+            const labelElements = document.querySelectorAll('.row-round-label');
+            const deadlineElements = document.querySelectorAll('.row-round-deadline');
+            let rounds = [];
+
+            for(let i = 0; i < labelElements.length; i++) {
+                const lbl = labelElements[i].value.trim();
+                const dln = deadlineElements[i].value;
+                if(lbl && dln) {
+                    rounds.push({ label: lbl, deadline: dln });
+                }
+            }
+
+            const dataObj = { name, track, regDeadline, rounds };
+
+            if (idx > -1) {
+                competitions[idx] = dataObj;
+            } else {
+                competitions.push(dataObj);
+            }
+
+            closeDrawer();
+            renderList();
+        }
+
+        function triggerEdit(idx) {
+            const c = competitions[idx];
+            document.getElementById('inp-name').value = c.name;
+            document.getElementById('inp-track').value = c.track;
+            document.getElementById('inp-reg-deadline').value = c.regDeadline;
+            document.getElementById('edit-index').value = idx;
+            document.getElementById('form-intent-title').innerText = "Modify Tracking Matrix";
+
+            const root = document.getElementById('rounds-inputs-root');
+            root.innerHTML = '';
+            if(c.rounds && c.rounds.length > 0) {
+                c.rounds.forEach(r => addNewRoundRow(r.label, r.deadline));
+            } else {
+                addNewRoundRow('', '');
+            }
+
+            openDrawer();
+        }
+
+        function triggerDelete(idx) {
+            if (confirm("Discard this tracking profile?")) {
+                competitions.splice(idx, 1);
+                renderList();
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('inp-name').value = '';
+            document.getElementById('inp-track').value = '';
+            document.getElementById('inp-reg-deadline').value = '';
+            document.getElementById('rounds-inputs-root').innerHTML = '';
+            document.getElementById('edit-index').value = '-1';
+            document.getElementById('form-intent-title').innerText = "New Entry Matrix";
+            addNewRoundRow('', '');
+        }
+
+        window.onload = () => {
+            renderList();
+            renderPresets();
+        };
+    </script>
+</body>
+</html>
